@@ -65,6 +65,8 @@ class DataprocTestCase(BASE_TEST_CASE):
                       master_accelerator=None,
                       worker_accelerator=None,
                       optional_components=None,
+                      gcs_connector_version=None,
+                      bigquery_connector_version=None,
                       machine_type="n1-standard-1",
                       boot_disk_size="50GB"):
         self.name = "test-{}-{}-{}-{}".format(
@@ -99,6 +101,10 @@ class DataprocTestCase(BASE_TEST_CASE):
             args.append("--worker-accelerator={}".format(worker_accelerator))
         if optional_components:
             args.append("--optional-components={}".format(optional_components))
+        if gcs_connector_version:
+            args.append("--metadata=gcs-connector-version={}".format(gcs_connector_version))
+        if bigquery_connector_version:
+            args.append("--metadata=bigquery-connector-version={}".format(bigquery_connector_version))
 
         args.append("--master-machine-type={}".format(machine_type))
         args.append("--worker-machine-type={}".format(machine_type))
